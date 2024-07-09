@@ -4,7 +4,7 @@ import { useState } from "react";
 import QueryBuilder, { formatQuery } from "react-querybuilder";
 import type { RuleGroupType } from "react-querybuilder";
 import { fields } from "@/lib/fields";
-import "react-querybuilder/dist/query-builder.css";
+import "./styles.css"
 
 const initialQuery: RuleGroupType = { combinator: "and", rules: [] };
 
@@ -19,7 +19,7 @@ export default function Home() {
         controlClassnames={{
           queryBuilder: "queryBuilder-branches bg-background",
           header:"bg-background",
-          ruleGroup: "not working",
+          ruleGroup: "bg-background",
           body: "bg-background",
           addRule:
             "ml-auto p-2.5 rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90",
