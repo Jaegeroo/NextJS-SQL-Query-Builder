@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import QueryBuilder, { formatQuery } from "react-querybuilder";
-import type { RuleGroupType } from "react-querybuilder";
+import { initialQuery } from "@/components/initial-query";
 import { ClientOnly } from "@/components/client-only";
 import { fields } from "@/lib/fields";
 import { ControlClassnames } from "@/components/control-classnames";
@@ -13,26 +13,6 @@ import { LuTrash2 } from "react-icons/lu";
 import "@/app/styles.css";
 
 export default function Home() {
-  const initialQuery: RuleGroupType = {
-    combinator: "and",
-    rules: [
-      {
-        id: "",
-        rules: [
-          {
-            id: "",
-            field: "firstname",
-            operator: "=",
-            valueSource: "value",
-            value: "",
-          },
-        ],
-        combinator: "and",
-        not: false,
-      },
-    ],
-  };
-
   const [query, setQuery] = useState(initialQuery);
   const [data, setData] = useState<UserT[]>([]);
 
