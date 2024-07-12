@@ -21,6 +21,10 @@ export default function Home() {
   const [data, setData] = useState<UserT[]>([]);
 
   useEffect(() => {
+    console.log(query);
+  }, [query]);
+
+  useEffect(() => {
     async function getData() {
       try {
         const fetchedData = await getUsers(formatQuery(query, "sql"));
@@ -59,7 +63,6 @@ export default function Home() {
               fields={fields}
               query={query}
               onQueryChange={setQuery}
-              controlElements={{removeGroupAction: () => null}}
               controlClassnames={ControlClassnames}
               translations={{
                 addRule: {
