@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import QueryBuilder, { formatQuery, RuleGroupType } from "react-querybuilder";
-import {  } from "react-querybuilder";
+import {} from "react-querybuilder";
 import { initialQuery } from "@/lib/initial-query";
 import { ClientOnly } from "@/components/client-only";
 import { fields } from "@/lib/fields";
@@ -65,14 +65,14 @@ export default function Home() {
                 addRule: {
                   label: (
                     <div className="flex items-center">
-                      <IoMdAdd className="mr-1 text-md" /> Filter
+                      <IoMdAdd className="mr-1 text-lg" /> Filter
                     </div>
                   ),
                 },
                 addGroup: {
                   label: (
                     <div className="flex items-center">
-                      <IoMdAdd className="mr-1 text-md" /> Group
+                      <IoMdAdd className="mr-1 text-lg" /> Group
                     </div>
                   ),
                 },
