@@ -2,10 +2,10 @@
 
 import { useState, useEffect } from "react";
 import QueryBuilder, { formatQuery } from "react-querybuilder";
-import { initialQuery } from "@/components/initial-query";
+import { initialQuery } from "@/lib/initial-query";
 import { ClientOnly } from "@/components/client-only";
 import { fields } from "@/lib/fields";
-import { ControlClassnames } from "@/components/control-classnames";
+import { ControlClassnames } from "@/lib/control-classnames";
 import { UsersTable } from "@/components/users-table";
 import { getUsers } from "@/lib/actions";
 import { UserT } from "@/lib/types";
