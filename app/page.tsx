@@ -1,38 +1,51 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import QueryBuilder, { formatQuery, getOption } from "react-querybuilder";
-import type {
-  RuleGroupType,
-  CombinatorSelectorProps,
-} from "react-querybuilder";
+import { useState, useEffect } from "react";
+import QueryBuilder, { formatQuery } from "react-querybuilder";
+import type { RuleGroupType } from "react-querybuilder";
 import { ClientOnly } from "@/components/client-only";
 import { fields } from "@/lib/fields";
 import { ControlClassnames } from "@/components/control-classnames";
 import { UsersTable } from "@/components/users-table";
 import { getUsers } from "@/lib/actions";
 import { UserT } from "@/lib/types";
-import { ThemeToggler } from "@/components/theme/theme-toggler";
+import { LuTrash2 } from "react-icons/lu";
 import "@/app/styles.css";
 
 export default function Home() {
-  const initialQuery: RuleGroupType = { combinator: "and", rules: [] };
+  const initialQuery: RuleGroupType = {
+    combinator: "and",
+    rules: [
+      {
+        id: "",
+        rules: [
+          {
+            id: "",
+            field: "firstname",
+            operator: "=",
+            valueSource: "value",
+            value: "",
+          },
+        ],
+        combinator: "and",
+        not: false,
+      },
+    ],
+  };
+
   const [query, setQuery] = useState(initialQuery);
   const [data, setData] = useState<UserT[]>([]);
 
-  const CombinatorSelector = (props: CombinatorSelectorProps) => (
-    // Render static value to prevent combinator updates
-    <div className={props.className} title={props.title}>
-      {getOption(props.options, props.value!)?.label}
-    </div>
-  );
+  useEffect(() => {
+    console.log(query);
+  }, [query]);
 
   useEffect(() => {
     async function getData() {
       try {
         const fetchedData = await getUsers(formatQuery(query, "sql"));
-        console.log(typeof fetchedData);
-        console.log(fetchedData);
+        // console.log(typeof fetchedData);
+        // console.log(fetchedData);
         setData(fetchedData);
       } catch (error) {
         console.error("Error fetching data: ", error);
@@ -52,6 +65,8 @@ export default function Home() {
             controlClassnames={ControlClassnames}
             translations={{
               addRule: { label: "+ Filter" },
+              removeRule: { label: <LuTrash2 /> },
+              removeGroup: { label: <LuTrash2 /> },
             }}
             showCombinatorsBetweenRules
           />
@@ -62,7 +77,6 @@ export default function Home() {
           <code>{formatQuery(query, "sql")}</code>
         </div>
       </div>
-      <ThemeToggler />
     </main>
   );
 }

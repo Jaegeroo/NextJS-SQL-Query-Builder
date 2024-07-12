@@ -32,6 +32,10 @@
   align-items: flex-start;
 }
 
+.ruleGroup-body:only-child + .ruleGroup-addGroup {
+  display: none;
+}
+
 /* Hide "add rule" button from root group */
 .queryBuilder > .ruleGroup > .ruleGroup-header > .ruleGroup-addRule {
   display: none;
@@ -40,6 +44,7 @@
 .queryBuilder > .ruleGroup > .ruleGroup-body .ruleGroup-addGroup {
   display: none;
 }
+
 
 /* Hide "remove group" button from "and" groups */
 /* .queryBuilder > .ruleGroup > .ruleGroup-body .ruleGroup-remove {
