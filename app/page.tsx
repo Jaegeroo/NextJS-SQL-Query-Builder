@@ -42,23 +42,25 @@ export default function Home() {
   }, [query]);
 
   return (
-    <main className="container mx-auto mt-5 relative">
-      <ClientOnly>
-        <QueryBuilder
-          fields={fields}
-          query={query}
-          onQueryChange={setQuery}
-          controlClassnames={ControlClassnames}
-          translations={{
-            addRule: { label: "+ Filter" },
-          }}
-          showCombinatorsBetweenRules
-        />
-      </ClientOnly>
-      <UsersTable data={data} />
-      <div>
-        <h1>Query:</h1>
-        <code>{formatQuery(query, "sql")}</code>
+    <main className="mt-5 relative">
+      <div className="container">
+        <ClientOnly>
+          <QueryBuilder
+            fields={fields}
+            query={query}
+            onQueryChange={setQuery}
+            controlClassnames={ControlClassnames}
+            translations={{
+              addRule: { label: "+ Filter" },
+            }}
+            showCombinatorsBetweenRules
+          />
+        </ClientOnly>
+        <UsersTable data={data} />
+        <div>
+          <h1>Query:</h1>
+          <code>{formatQuery(query, "sql")}</code>
+        </div>
       </div>
       <ThemeToggler />
     </main>

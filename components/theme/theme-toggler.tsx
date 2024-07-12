@@ -20,7 +20,7 @@ export function ThemeToggler() {
       <Tooltip delayDuration={100}>
         <TooltipTrigger asChild>
           <Button
-            className="absolute right-0 rounded-full w-8 h-8 bg-background"
+            className="absolute top-0 right-2 rounded-full w-8 h-8 bg-background"
             variant="outline"
             size="icon"
             onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
