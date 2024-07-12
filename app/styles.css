@@ -3,12 +3,12 @@
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  padding: 0.5rem;
 }
 
 /* Add border to each groups */
 .ruleGroup .ruleGroup[data-level="1"] {
   border-width: 1px;
+  padding: 0.5rem;
 }
 
 /* Move add group button to the bottom */
