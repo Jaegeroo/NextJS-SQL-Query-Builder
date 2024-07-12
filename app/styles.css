@@ -1,3 +1,8 @@
+/* Margin for the outermost div */
+.queryBuilder {
+  margin-bottom: 1rem;
+}
+
 /* Override ruleGroup layout */
 .ruleGroup {
   display: flex;
@@ -45,7 +50,6 @@
   display: none;
 }
 
-
 /* Hide "remove group" button from "and" groups */
 /* .queryBuilder > .ruleGroup > .ruleGroup-body .ruleGroup-remove {
   display: none;
@@ -63,9 +67,6 @@
   --content: "Where";
   content: var(--content);
 }
-
-
-
 
 
 

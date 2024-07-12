@@ -1,19 +1,24 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import QueryBuilder, { formatQuery } from "react-querybuilder";
+import QueryBuilder, { formatQuery, RuleGroupType } from "react-querybuilder";
+import {  } from "react-querybuilder";
 import { initialQuery } from "@/lib/initial-query";
 import { ClientOnly } from "@/components/client-only";
 import { fields } from "@/lib/fields";
 import { ControlClassnames } from "@/lib/control-classnames";
 import { UsersTable } from "@/components/users-table";
 import { getUsers } from "@/lib/actions";
+import { Button } from "@/components/ui/button";
 import { UserT } from "@/lib/types";
 import { LuTrash2 } from "react-icons/lu";
+import { MdFilterAlt, MdFilterAltOff } from "react-icons/md";
+import { IoMdAdd } from "react-icons/io";
 import "@/app/styles.css";
 
 export default function Home() {
-  const [query, setQuery] = useState(initialQuery);
+  const [showFilter, setShowFilter] = useState<boolean>(false);
+  const [query, setQuery] = useState<RuleGroupType>(initialQuery);
   const [data, setData] = useState<UserT[]>([]);
 
   useEffect(() => {
@@ -33,20 +38,52 @@ export default function Home() {
   return (
     <main className="mt-5 relative">
       <div className="container">
-        <ClientOnly>
-          <QueryBuilder
-            fields={fields}
-            query={query}
-            onQueryChange={setQuery}
-            controlClassnames={ControlClassnames}
-            translations={{
-              addRule: { label: "+ Filter" },
-              removeRule: { label: <LuTrash2 /> },
-              removeGroup: { label: <LuTrash2 /> },
-            }}
-            showCombinatorsBetweenRules
-          />
-        </ClientOnly>
+        <div className="flex justify-end mb-2">
+          <Button variant="ghost" onClick={() => setShowFilter(!showFilter)}>
+            {showFilter ? (
+              <>
+                <MdFilterAltOff className="text-xl mr-2" />
+                Hide
+              </>
+            ) : (
+              <>
+                <MdFilterAlt className="text-xl mr-2" />
+                Show
+              </>
+            )}
+            &nbsp;Filter
+          </Button>
+        </div>
+        {showFilter && (
+          <ClientOnly>
+            <QueryBuilder
+              fields={fields}
+              query={query}
+              onQueryChange={setQuery}
+              controlClassnames={ControlClassnames}
+              translations={{
+                addRule: {
+                  label: (
+                    <div className="flex items-center">
+                      <IoMdAdd className="mr-1 text-md" /> Filter
+                    </div>
+                  ),
+                },
+                addGroup: {
+                  label: (
+                    <div className="flex items-center">
+                      <IoMdAdd className="mr-1 text-md" /> Group
+                    </div>
+                  ),
+                },
+                removeRule: { label: <LuTrash2 /> },
+                removeGroup: { label: <LuTrash2 /> },
+              }}
+              showCombinatorsBetweenRules
+            />
+          </ClientOnly>
+        )}
+
         <UsersTable data={data} />
         <div>
           <h1>Query:</h1>

@@ -51,7 +51,6 @@ export function UsersTable({ data }: { data: UserT[] }) {
 
   return (
     <div className="w-full">
-      <div className="flex items-center py-4"></div>
       <div className="rounded-md border">
         <Table>
           <TableHeader>
