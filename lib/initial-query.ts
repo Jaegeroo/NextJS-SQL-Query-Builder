@@ -4,16 +4,7 @@ export const initialQuery: RuleGroupType = {
   combinator: "and",
   rules: [
     {
-      id: "",
-      rules: [
-        {
-          id: "",
-          field: "firstname",
-          operator: "=",
-          valueSource: "value",
-          value: "",
-        },
-      ],
+      rules: [],
       combinator: "and",
       not: false,
     },
