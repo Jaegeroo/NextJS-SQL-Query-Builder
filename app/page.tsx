@@ -2,17 +2,21 @@
 
 import { useState, useEffect } from "react";
 import QueryBuilder, { formatQuery, RuleGroupType } from "react-querybuilder";
-import { initialQuery } from "@/lib/initial-query";
+
 import { ClientOnly } from "@/components/client-only";
+import { UsersTable } from "@/components/users-table";
+import { Button } from "@/components/ui/button";
+
+import { initialQuery } from "@/lib/initial-query";
+import { getUsers } from "@/lib/actions";
 import { fields } from "@/lib/fields";
 import { ControlClassnames } from "@/lib/control-classnames";
-import { UsersTable } from "@/components/users-table";
-import { getUsers } from "@/lib/actions";
-import { Button } from "@/components/ui/button";
 import { UserT } from "@/lib/types";
+
 import { LuTrash2 } from "react-icons/lu";
 import { MdFilterAlt, MdFilterAltOff } from "react-icons/md";
 import { IoMdAdd } from "react-icons/io";
+
 import "@/app/styles.css";
 
 export default function Home() {
