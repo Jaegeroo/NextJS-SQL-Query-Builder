@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from "react";
 import QueryBuilder, { formatQuery, RuleGroupType } from "react-querybuilder";
-import {} from "react-querybuilder";
 import { initialQuery } from "@/lib/initial-query";
 import { ClientOnly } from "@/components/client-only";
 import { fields } from "@/lib/fields";
@@ -60,6 +59,7 @@ export default function Home() {
               fields={fields}
               query={query}
               onQueryChange={setQuery}
+              controlElements={{removeGroupAction: () => null}}
               controlClassnames={ControlClassnames}
               translations={{
                 addRule: {
