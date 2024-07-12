@@ -1,3 +1,5 @@
+
+/* Override ruleGroup layout */
 .ruleGroup {
   display: flex;
   flex-direction: column;
@@ -6,51 +8,40 @@
   border-width: 1px;
 }
 
-.queryBuilder .ruleGroup .ruleGroup-header {
-  /* Move group header below body. */
-  /* You could also accomplish the same effect with */
-  /* a custom RuleGroup or Rule component without */
-  /* rearranging the header and body. Also note that */
-  /* this method can cause problems with drag-and-drop. */
+/* Move add group button to the bottom */
+.ruleGroup-header {
   order: 2;
 }
 
-.ruleGroup-body {
-  /* Override the default flex layout */
-  display: grid !important;
-  /* Allow the right-hand column (the rule/subgroup) to expand as needed */
-  /* Collapse the left-hand column (the combinator) to the width of the content */
-  grid-template-columns: min-content auto;
-  /* Keep the combinator aligned with the top of the rule/subgroup */
-  align-items: start;
-}
-
-.ruleGroup-body .betweenRules{
+/* Align center rules between groups */
+.betweenRules{
   display: flex;
-  flex-direction: column;
+  justify-content: center;
 }
 
-/* Indent the first rule/subgroup since it has no preceding combinator */
-.ruleGroup-body > .rule:first-child:not(:only-child),
-.ruleGroup-body > .ruleGroup:first-child:not(:only-child) {
-  grid-column-start: 2;
+/* Align rules and input fields inside eachs rules groups */
+.ruleGroup:not([data-level="0"]):not(
+    [data-level="1"]:where(:not(:has(> .ruleGroup-body > .rule)))
+  )
+  .ruleGroup-body {
+  grid-template-columns: min-content auto;
+  display: grid;
+  align-items: flex-start;
 }
 
-
-
+/* Hide "add rule" button from root group */
 .queryBuilder > .ruleGroup > .ruleGroup-header > .ruleGroup-addRule {
-  /* Hide "add rule" button from root group */
   display: none;
 }
+/* Hide "add group" button from "and" groups */
 .queryBuilder > .ruleGroup > .ruleGroup-body .ruleGroup-addGroup {
-  /* Hide "add group" button from "and" groups */
   display: none;
-}
-.queryBuilder > .ruleGroup > .ruleGroup-body .ruleGroup-remove {
-  /* Hide "remove group" button from "and" groups */
-  /* display: none; */
 }
 
+/* Hide "remove group" button from "and" groups */
+/* .queryBuilder > .ruleGroup > .ruleGroup-body .ruleGroup-remove {
+  display: none;
+} */
 
 /* Add "Where" at the first child of rule */
 .ruleGroup:not([data-level="0"]):not(
@@ -59,9 +50,9 @@
   .ruleGroup-body:has(:first-child):before {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   font-size: 0.875rem;
-  line-height: 2.3rem;
+  padding: 8px;
   color: var(--twentycrm-font-color-secondary);
   --tw-content: "Where";
   content: var(--tw-content);
@@ -77,8 +68,7 @@
 
 
 
-
-
+/* built-in css from react-querybuilder, just changed some colors */
 .ruleGroup .ruleGroup-body {
   display: flex;
   flex-direction: column;
