@@ -5,6 +5,80 @@
   padding: 0.5rem;
   border-width: 1px;
 }
+
+.queryBuilder .ruleGroup .ruleGroup-header {
+  /* Move group header below body. */
+  /* You could also accomplish the same effect with */
+  /* a custom RuleGroup or Rule component without */
+  /* rearranging the header and body. Also note that */
+  /* this method can cause problems with drag-and-drop. */
+  order: 2;
+}
+
+.ruleGroup-body {
+  /* Override the default flex layout */
+  display: grid !important;
+  /* Allow the right-hand column (the rule/subgroup) to expand as needed */
+  /* Collapse the left-hand column (the combinator) to the width of the content */
+  grid-template-columns: min-content auto;
+  /* Keep the combinator aligned with the top of the rule/subgroup */
+  align-items: start;
+}
+
+.ruleGroup-body .betweenRules{
+  display: flex;
+  flex-direction: column;
+}
+
+/* Indent the first rule/subgroup since it has no preceding combinator */
+.ruleGroup-body > .rule:first-child:not(:only-child),
+.ruleGroup-body > .ruleGroup:first-child:not(:only-child) {
+  grid-column-start: 2;
+}
+
+
+
+.queryBuilder > .ruleGroup > .ruleGroup-header > .ruleGroup-addRule {
+  /* Hide "add rule" button from root group */
+  display: none;
+}
+.queryBuilder > .ruleGroup > .ruleGroup-body .ruleGroup-addGroup {
+  /* Hide "add group" button from "and" groups */
+  display: none;
+}
+.queryBuilder > .ruleGroup > .ruleGroup-body .ruleGroup-remove {
+  /* Hide "remove group" button from "and" groups */
+  /* display: none; */
+}
+
+
+/* Add "Where" at the first child of rule */
+.ruleGroup:not([data-level="0"]):not(
+    [data-level="1"]:where(:not(:has(> .ruleGroup-body > .rule)))
+  )
+  .ruleGroup-body:has(:first-child):before {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.875rem;
+  line-height: 2.3rem;
+  color: var(--twentycrm-font-color-secondary);
+  --tw-content: "Where";
+  content: var(--tw-content);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 .ruleGroup .ruleGroup-body {
   display: flex;
   flex-direction: column;
@@ -24,9 +98,7 @@
   gap: 0.5rem;
   align-items: baseline;
 }
-.ruleGroup .betweenRules {
-  display: flex;
-}
+
 .ruleGroup .shiftActions {
   display: flex;
   flex-direction: column;
@@ -85,19 +157,7 @@
 .queryBuilder-branches .ruleGroup .ruleGroup::after {
   height: calc(50% + 1px);
 }
-.queryBuilder-branches .betweenRules {
-  position: relative;
-}
-.queryBuilder-branches .betweenRules::before {
-  content: "";
-  width: 0.5rem;
-  left: calc(-0.5rem - 1px);
-  border-radius: 0;
-  position: absolute;
-  top: -0.5rem;
-  height: calc(100% + 0.5rem);
-  border-width: 0 0 0 1px;
-}
+
 .ruleGroup {
   border-color: hsl(var(--border));
   border-style: solid;
@@ -139,7 +199,7 @@
 .queryBuilder-branches .rule::after,
 .queryBuilder-branches .ruleGroup .ruleGroup::before,
 .queryBuilder-branches .ruleGroup .ruleGroup::after {
-  border-color: hsl(var(--primary));
+  border-color: hsl(var(--));
   border-style: solid;
 }
 .queryBuilder-branches .rule:last-child::before,
@@ -150,6 +210,6 @@
   position: relative;
 }
 .queryBuilder-branches .betweenRules::before {
-  border-color: hsl(var(--primary));
+  border-color: hsl(var(--));
   border-style: solid;
 }

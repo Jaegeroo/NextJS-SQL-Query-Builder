@@ -1,3 +1,5 @@
+"use server";
+
 import { neon } from "@neondatabase/serverless";
 import { UserT } from "./types";
 
@@ -11,7 +13,7 @@ export async function getUsers(query: string) {
     // WHERE ${query}
     // `
     // console.log(constructedQuery)
-    // const response = await sql`${constructedQuery}`
+    // const response = await sql`SELECT * FROM users WHERE firstname = 'Emily'`
 
     const response = await sql`SELECT * FROM users`;
 

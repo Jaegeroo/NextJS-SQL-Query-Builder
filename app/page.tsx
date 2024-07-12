@@ -1,8 +1,11 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import QueryBuilder, { formatQuery } from "react-querybuilder";
-import type { RuleGroupType } from "react-querybuilder";
+import QueryBuilder, { formatQuery, getOption } from "react-querybuilder";
+import type {
+  RuleGroupType,
+  CombinatorSelectorProps,
+} from "react-querybuilder";
 import { ClientOnly } from "@/components/client-only";
 import { fields } from "@/lib/fields";
 import { ControlClassnames } from "@/components/control-classnames";
@@ -16,6 +19,13 @@ export default function Home() {
   const initialQuery: RuleGroupType = { combinator: "and", rules: [] };
   const [query, setQuery] = useState(initialQuery);
   const [data, setData] = useState<UserT[]>([]);
+
+  const CombinatorSelector = (props: CombinatorSelectorProps) => (
+    // Render static value to prevent combinator updates
+    <div className={props.className} title={props.title}>
+      {getOption(props.options, props.value!)?.label}
+    </div>
+  );
 
   useEffect(() => {
     async function getData() {
@@ -39,6 +49,10 @@ export default function Home() {
           query={query}
           onQueryChange={setQuery}
           controlClassnames={ControlClassnames}
+          translations={{
+            addRule: { label: "+ Filter" },
+          }}
+          showCombinatorsBetweenRules
         />
       </ClientOnly>
       <UsersTable data={data} />
