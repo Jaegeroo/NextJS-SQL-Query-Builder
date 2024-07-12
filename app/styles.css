@@ -46,7 +46,7 @@
   display: none;
 } */
 
-/* Add "Where" at the first child of rule */
+/* Add "Where" at the first child of rules */
 .ruleGroup:not([data-level="0"]):not(
     [data-level="1"]:where(:not(:has(> .ruleGroup-body > .rule)))
   )
@@ -56,9 +56,8 @@
   justify-content: flex-start;
   font-size: 0.875rem;
   padding: 8px;
-  color: var(--twentycrm-font-color-secondary);
-  --tw-content: "Where";
-  content: var(--tw-content);
+  --content: "Where";
+  content: var(--content);
 }
 
 
