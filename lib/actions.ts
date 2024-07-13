@@ -8,6 +8,8 @@ const sql = neon(process.env.NEXT_PUBLIC_DATABASE_URL as string);
 
 export async function getUsers(query: string) {
   try {
+    const formattedQuery = query.replace(/\(|\)/g, "");
+    console.log(formattedQuery)
     // const constructedQuery = `
     // SELECT * FROM users
     // WHERE ${query}
@@ -17,7 +19,7 @@ export async function getUsers(query: string) {
 
     const response = await sql`SELECT * FROM users`;
 
-    const users: UserT[] = response.map((user: any) => ({
+    const users: UserT[] = response.map((user) => ({
       id: user.id,
       firstname: user.firstname,
       lastname: user.lastname,

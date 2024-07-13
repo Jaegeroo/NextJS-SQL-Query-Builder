@@ -25,13 +25,10 @@ export default function Home() {
   const [data, setData] = useState<UserT[]>([]);
 
   useEffect(() => {
-    console.log(query);
-  }, [query]);
-
-  useEffect(() => {
     async function getData() {
       try {
-        const fetchedData = await getUsers(formatQuery(query, "sql"));
+        const formattedQuery = formatQuery(query, "cel")
+        const fetchedData = await getUsers(formattedQuery);
         // console.log(typeof fetchedData);
         // console.log(fetchedData);
         setData(fetchedData);
