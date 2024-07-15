@@ -4,16 +4,19 @@
 
 ## Getting started
 
-First, run the development server:
-
 ```bash
-npm run dev
+# clone repository
+git clone https://github.com/Donjheggo/NextJS_SQL_Query_Builder
+
+# install dependencies
+npm install
 # or
-yarn dev
+pnpm install
+
+# run development server
+npm dev
 # or
 pnpm dev
-# or
-bun dev
 ```
 
 ## Query format
