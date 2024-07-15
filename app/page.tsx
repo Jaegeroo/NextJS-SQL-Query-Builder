@@ -27,10 +27,8 @@ export default function Home() {
   useEffect(() => {
     async function getData() {
       try {
-        const formattedQuery = formatQuery(query, "cel");
+        const formattedQuery = formatQuery(query, "sql");
         const fetchedData = await getUsers(formattedQuery);
-        // console.log(typeof fetchedData);
-        // console.log(fetchedData);
         setUserData(fetchedData);
       } catch (error) {
         console.error("Error fetching data: ", error);
