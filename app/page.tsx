@@ -1,39 +1,46 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useEffect, useReducer } from "react";
 import QueryBuilder, { formatQuery, RuleGroupType } from "react-querybuilder";
 
 import { ClientOnly } from "@/components/client-only";
-import { UsersTable } from "@/components/users-table";
+import { UsersTable } from "@/components/table/users-table";
 import { Button } from "@/components/ui/button";
 
-import { initialQuery } from "@/lib/initial-query";
 import { getUsers } from "@/lib/actions";
 import { fields } from "@/lib/fields";
 import { ControlClassnames } from "@/lib/control-classnames";
-import { UserT } from "@/lib/types";
 
 import { LuTrash2 } from "react-icons/lu";
 import { MdFilterAlt, MdFilterAltOff } from "react-icons/md";
 import { IoMdAdd } from "react-icons/io";
 
+import { reducer, initialReducerState } from "@/lib/reducer";
+
 import "@/app/styles.css";
 
 export default function Home() {
-  const [showFilter, setShowFilter] = useState<boolean>(false);
-  const [query, setQuery] = useState<RuleGroupType>(initialQuery);
-  const [userData, setUserData] = useState<UserT[]>([]);
+  const [state, dispatch] = useReducer(reducer, initialReducerState);
+  const { showFilter, query, userData } = state;
+
+  const toggleFilter = () => {
+    dispatch({ type: "SET_SHOW_FILTER", payload: !showFilter });
+  };
+
+  const setQuery = (newQuery: RuleGroupType) => {
+    dispatch({ type: "SET_QUERY", payload: newQuery });
+  };
 
   useEffect(() => {
-    async function getData() {
+    const getData = async () => {
       try {
         const formattedQuery = formatQuery(query, "sql");
         const fetchedData = await getUsers(formattedQuery);
-        setUserData(fetchedData);
+        dispatch({ type: "SET_USER_DATA", payload: fetchedData });
       } catch (error) {
         console.error("Error fetching data: ", error);
       }
-    }
+    };
     getData();
   }, [query]);
 
@@ -41,7 +48,7 @@ export default function Home() {
     <main className="mt-5 relative">
       <div className="container">
         <div className="flex justify-end mb-2">
-          <Button variant="ghost" onClick={() => setShowFilter(!showFilter)}>
+          <Button variant="ghost" onClick={toggleFilter}>
             {showFilter ? (
               <>
                 <MdFilterAltOff className="text-xl mr-2" />

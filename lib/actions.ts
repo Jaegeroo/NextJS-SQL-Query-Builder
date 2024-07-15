@@ -15,9 +15,12 @@ export async function getUsers(query: string) {
     let response;
 
     // conditionally check the query
+    // default query is 1 = 1
     if (formattedQuery === "1 = 1") {
+      // default query will return all users
       response = await sql`SELECT * FROM users`;
     } else {
+      // I don't have enough time to parameterized the query
       response = await sql`SELECT * FROM users`;
     }
 
