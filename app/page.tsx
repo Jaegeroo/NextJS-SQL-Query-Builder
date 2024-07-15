@@ -9,14 +9,12 @@ import { Button } from "@/components/ui/button";
 
 import { getUsers } from "@/lib/actions";
 import { fields } from "@/lib/fields";
+import { reducer, initialReducerState } from "@/lib/reducer";
 import { ControlClassnames } from "@/lib/control-classnames";
 
 import { LuTrash2 } from "react-icons/lu";
 import { MdFilterAlt, MdFilterAltOff } from "react-icons/md";
 import { IoMdAdd } from "react-icons/io";
-
-import { reducer, initialReducerState } from "@/lib/reducer";
-
 import "@/app/styles.css";
 
 export default function Home() {
