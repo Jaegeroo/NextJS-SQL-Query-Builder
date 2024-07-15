@@ -69,7 +69,7 @@ export default function Home() {
           </Button>
         </div>
 
-        {/* COnditional rendering of the filter */}
+        {/* Conditional rendering of the filter */}
         {showFilter && (
           <ClientOnly>
             <QueryBuilder
