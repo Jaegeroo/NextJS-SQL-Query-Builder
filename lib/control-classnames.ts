@@ -1,6 +1,7 @@
 // Reference https://react-querybuilder.js.org/docs/styling/classnames
 
 export const ControlClassnames = {
+  ruleGroup: "rounded-md",
   addRule:
     "rounded-md text-sm px-3 py-2 font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground",
   addGroup:

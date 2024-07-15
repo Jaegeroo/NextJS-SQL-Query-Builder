@@ -10,6 +10,18 @@
   gap: 0.5rem;
 }
 
+/* arrange rule group gap */
+.ruleGroup .ruleGroup-body {
+  gap: 0.3rem;
+}
+
+/* arrange group, header and rules gaps */
+.ruleGroup .ruleGroup-header,
+.ruleGroup .rule {
+  display: flex;
+  gap: 0.3rem;
+}
+
 /* Add border to each groups */
 .ruleGroup .ruleGroup[data-level="1"] {
   border-width: 1px;
@@ -66,142 +78,4 @@
   padding: 8px;
   --content: "Where";
   content: var(--content);
-}
-
-
-
-/* built-in css from react-querybuilder, I just changed some colors */
-.ruleGroup .ruleGroup-body {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-.ruleGroup .ruleGroup-body:empty {
-  display: none;
-}
-.ruleGroup .ruleGroup-header,
-.ruleGroup .rule {
-  display: flex;
-  gap: 0.5rem;
-  align-items: center;
-}
-.ruleGroup .rule .rule-value:has(.rule-value-list-item) {
-  display: flex;
-  gap: 0.5rem;
-  align-items: baseline;
-}
-
-.ruleGroup .shiftActions {
-  display: flex;
-  flex-direction: column;
-}
-.ruleGroup .shiftActions > * {
-  padding: 0;
-}
-.dndOver.rule,
-.dndOver.ruleGroup-header {
-  padding-bottom: 0.5rem;
-}
-.dndOver.betweenRules {
-  padding-top: 0.5rem;
-}
-.queryBuilder-branches .ruleGroup-body {
-  margin-left: calc(2 * 0.5rem);
-}
-.queryBuilder-branches .rule,
-.queryBuilder-branches .ruleGroup .ruleGroup {
-  position: relative;
-}
-.queryBuilder-branches .rule::before,
-.queryBuilder-branches .rule::after,
-.queryBuilder-branches .ruleGroup .ruleGroup::before,
-.queryBuilder-branches .ruleGroup .ruleGroup::after {
-  content: "";
-  width: 0.5rem;
-  left: calc(-0.5rem - 1px);
-  border-radius: 0;
-  position: absolute;
-}
-.queryBuilder-branches .rule::before,
-.queryBuilder-branches .ruleGroup .ruleGroup::before {
-  top: -0.5rem;
-  height: calc(50% + 0.5rem);
-  border-width: 0 0 1px 1px;
-}
-.queryBuilder-branches .rule::after,
-.queryBuilder-branches .ruleGroup .ruleGroup::after {
-  top: 50%;
-  height: 50%;
-  border-width: 0 0 0 1px;
-}
-.queryBuilder-branches .rule:last-child::after,
-.queryBuilder-branches .ruleGroup .ruleGroup:last-child::after {
-  display: none;
-}
-.queryBuilder-branches .ruleGroup .ruleGroup::before,
-.queryBuilder-branches .ruleGroup .ruleGroup::after {
-  left: calc(-0.5rem - 1px - 1px);
-}
-.queryBuilder-branches .ruleGroup .ruleGroup::before {
-  top: calc(-0.5rem - 1px);
-  height: calc(50% + 0.5rem + 1px);
-}
-.queryBuilder-branches .ruleGroup .ruleGroup::after {
-  height: calc(50% + 1px);
-}
-
-.ruleGroup {
-  border-color: hsl(var(--border));
-  border-style: solid;
-  border-radius: 0.25rem;
-  /* background: rgba(0, 75, 183, 0.2); */
-}
-.ruleGroup .shiftActions > * {
-  background-color: rgba(0, 0, 0, 0);
-  border: none;
-  cursor: pointer;
-}
-.dndOver.rule,
-.dndOver.ruleGroup-header {
-  border-bottom-width: 2px;
-  border-bottom-style: dashed;
-  border-bottom-color: hsl(var(--border));
-}
-.dndOver.rule.dndCopy,
-.dndOver.ruleGroup-header.dndCopy {
-  border-bottom-color: hsl(var(--border));
-}
-.dndOver.betweenRules {
-  border-top-width: 2px;
-  border-top-style: dashed;
-  border-top-color: hsl(var(--border));
-}
-.dndOver.betweenRules.dndCopy {
-  border-top-color: hsl(var(--border));
-}
-.ruleGroup.dndDragging,
-.rule.dndDragging {
-  opacity: 0.5;
-}
-.ruleGroup .queryBuilder-dragHandle,
-.rule .queryBuilder-dragHandle {
-  cursor: move;
-}
-.queryBuilder-branches .rule::before,
-.queryBuilder-branches .rule::after,
-.queryBuilder-branches .ruleGroup .ruleGroup::before,
-.queryBuilder-branches .ruleGroup .ruleGroup::after {
-  border-color: hsl(var(--));
-  border-style: solid;
-}
-.queryBuilder-branches .rule:last-child::before,
-.queryBuilder-branches .ruleGroup .ruleGroup:last-child::before {
-  border-bottom-left-radius: 0.25rem;
-}
-.queryBuilder-branches .betweenRules {
-  position: relative;
-}
-.queryBuilder-branches .betweenRules::before {
-  border-color: hsl(var(--));
-  border-style: solid;
 }
