@@ -4,7 +4,7 @@ import { neon } from "@neondatabase/serverless";
 import { UserT } from "./types";
 
 // initialized db
-const sql = neon(process.env.NEXT_PUBLIC_DATABASE_URL as string);
+const sql = neon(process.env.DATABASE_URL as string);
 
 export async function getUsers(query: string) {
   try {
