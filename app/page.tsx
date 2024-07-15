@@ -22,16 +22,16 @@ import "@/app/styles.css";
 export default function Home() {
   const [showFilter, setShowFilter] = useState<boolean>(false);
   const [query, setQuery] = useState<RuleGroupType>(initialQuery);
-  const [data, setData] = useState<UserT[]>([]);
+  const [userData, setUserData] = useState<UserT[]>([]);
 
   useEffect(() => {
     async function getData() {
       try {
-        const formattedQuery = formatQuery(query, "cel")
+        const formattedQuery = formatQuery(query, "cel");
         const fetchedData = await getUsers(formattedQuery);
         // console.log(typeof fetchedData);
         // console.log(fetchedData);
-        setData(fetchedData);
+        setUserData(fetchedData);
       } catch (error) {
         console.error("Error fetching data: ", error);
       }
@@ -88,7 +88,7 @@ export default function Home() {
           </ClientOnly>
         )}
 
-        <UsersTable data={data} />
+        <UsersTable data={userData} />
         <div>
           <h1>Query:</h1>
           <code>{formatQuery(query, "sql")}</code>
