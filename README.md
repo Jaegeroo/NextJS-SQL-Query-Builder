@@ -1,6 +1,8 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# NextJS Tailwind & Shadcn UI: SQL Query Builder
 
-## Getting Started
+![Screenshot](_assets/screenshot.jpg)
+
+## Getting started
 
 First, run the development server:
 
@@ -14,23 +16,79 @@ pnpm dev
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Query format
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+SQL format reference - https://react-querybuilder.js.org/docs/utils/export
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Fields
 
-## Learn More
+You can edit fields @/lib/fields.ts
 
-To learn more about Next.js, take a look at the following resources:
+```ts
+import type { Field, RuleType } from "react-querybuilder";
+import { defaultOperators, toFullOption } from "react-querybuilder";
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+export const validator = (r: RuleType) => !!r.value;
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+export const fields = (
+  [
+    {
+      name: "firstname",
+      label: "First Name",
+      placeholder: "Enter first name",
+      validator,
+    },
+    {
+      name: "lastname",
+      label: "Last Name",
+      placeholder: "Enter last name",
+      defaultOperator: "beginsWith",
+      validator,
+    },
+    { name: "age", label: "Age", inputType: "number", validator },
+    {
+      name: "gender",
+      label: "Gender",
+      operators: defaultOperators.filter((op) => op.name === "="),
+      valueEditorType: "select",
+      values: [
+        { name: "male", label: "Male" },
+        { name: "female", label: "Female" },
+      ],
+    },
+    { name: "height", placeholder: "cm", label: "Height", validator },
+    { name: "birthdate", label: "Birth Date", inputType: "date" },
+  ] satisfies Field[]
+).map((o) => toFullOption(o));
 
-## Deploy on Vercel
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Tailwind Classnames styling 
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+You can edit fields @/lib/fields.ts. 
+More classnames here https://react-querybuilder.js.org/docs/styling/classnames
+
+```ts
+export const ControlClassnames = {
+  ruleGroup: "rounded-md",
+  addRule:
+    "rounded-md text-sm px-3 py-2 font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground",
+  addGroup:
+    "rounded-md text-sm px-3 py-2 font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground",
+  operators:
+    "w-[auto] rounded-md border border-input bg-background px-1 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:opacity-50 [&>span]:line-clamp-1",
+  fields:
+    "w-[auto] rounded-md border border-input bg-background px-1 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:opacity-50 [&>span]:line-clamp-1",
+  value:
+    "w-[auto] rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50",
+  combinators:
+    "rounded-md border border-input bg-background px-1 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:opacity-50 [&>span]:line-clamp-1",
+  removeRule:
+    "rounded-md text-xl px-3 py-2 font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground",
+  removeGroup:
+    "rounded-md text-xl px-3 py-2 font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground",
+  valueSource:
+    "rounded-md border border-input bg-background px-1 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:opacity-50 [&>span]:line-clamp-1",
+};
+
+```
