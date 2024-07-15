@@ -18,29 +18,36 @@ import { IoMdAdd } from "react-icons/io";
 import "@/app/styles.css";
 
 export default function Home() {
+  // Use useReducer for state management
   const [state, dispatch] = useReducer(reducer, initialReducerState);
   const { showFilter, query, userData } = state;
 
+  // Toggle the visibility of the filter
   const toggleFilter = () => {
     dispatch({ type: "SET_SHOW_FILTER", payload: !showFilter });
   };
 
+  // Update the query state
   const setQuery = (newQuery: RuleGroupType) => {
     dispatch({ type: "SET_QUERY", payload: newQuery });
   };
 
+  // Fetch data whenever the query changes
   useEffect(() => {
     const getData = async () => {
       try {
+        // Format the query to SQL
         const formattedQuery = formatQuery(query, "sql");
+        // Fetch user data based on the query
         const fetchedData = await getUsers(formattedQuery);
+        // Update the user data state
         dispatch({ type: "SET_USER_DATA", payload: fetchedData });
       } catch (error) {
         console.error("Error fetching data: ", error);
       }
     };
     getData();
-  }, [query]);
+  }, [query]); // Dependency array, the effect runs the query changes
 
   return (
     <main className="mt-5 relative">
@@ -61,6 +68,8 @@ export default function Home() {
             &nbsp;Filter
           </Button>
         </div>
+
+        {/* COnditional rendering of the filter */}
         {showFilter && (
           <ClientOnly>
             <QueryBuilder
@@ -91,6 +100,7 @@ export default function Home() {
           </ClientOnly>
         )}
 
+        {/* Render the user data table */}
         <UsersTable data={userData} />
         <div>
           <h1>Query:</h1>

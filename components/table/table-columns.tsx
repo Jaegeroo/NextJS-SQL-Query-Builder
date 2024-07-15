@@ -1,6 +1,7 @@
 import { ColumnDef } from "@tanstack/react-table";
 import { UserT } from "@/lib/types";
 
+// Define the columns for the UsersTable
 export const columns: ColumnDef<UserT>[] = [
   {
     accessorKey: "id",

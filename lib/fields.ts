@@ -3,6 +3,7 @@ import { defaultOperators, toFullOption } from "react-querybuilder";
 
 export const validator = (r: RuleType) => !!r.value;
 
+// Define query fields
 export const fields = (
   [
     {

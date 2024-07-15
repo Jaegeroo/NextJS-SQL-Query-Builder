@@ -21,6 +21,8 @@ import {
 import { columns } from "./table-columns";
 import { UserT } from "@/lib/types";
 
+
+// This is a shad ui data-table component copy & pasted
 export function UsersTable({ data }: { data: UserT[] }) {
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(

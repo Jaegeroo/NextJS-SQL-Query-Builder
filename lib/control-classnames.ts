@@ -1,5 +1,5 @@
+// Define classnames for the elements
 // Reference https://react-querybuilder.js.org/docs/styling/classnames
-
 export const ControlClassnames = {
   ruleGroup: "rounded-md",
   addRule:
