@@ -6,7 +6,7 @@
 
 ```bash
 # clone repository
-git clone https://github.com/Donjheggo/NextJS_SQL_Query_Builder
+git clone https://github.com/Jaegeroo/NextJS_SQL_Query_Builder
 
 # install dependencies
 npm install
